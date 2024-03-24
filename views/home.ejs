@@ -13,18 +13,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <a class="navbar-brand" href="#">Facebook</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <div id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
               <a class="nav-link" href="#" role="button" id="signOutButton"
@@ -42,6 +32,34 @@
         <p id="profilePhoneNumber"></p>
       </div>
     </div>
-    
+    <script>
+      // Add event listener to the "Sign out" button
+      document
+        .getElementById("signOutButton")
+        .addEventListener("click", async () => {
+          try {
+            // Send a POST request to logout endpoint
+            const response = await fetch("/logout", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+
+            // Check if logout was successful
+            if (response.ok) {
+              // Redirect to login page after successful logout
+              window.location.href = "/";
+            } else {
+              // Handle logout failure
+              console.error("Logout failed");
+              // Optionally, you can display an error message to the user
+            }
+          } catch (error) {
+            console.error("Error during logout:", error);
+            // Optionally, you can display an error message to the user
+          }
+        });
+    </script>
   </body>
 </html>
